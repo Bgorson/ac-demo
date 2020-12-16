@@ -5,11 +5,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const checkBoxStyles = theme => ({
     root: {
+        padding:'0 0 0 12px',
       '&$checked': {
-        color: '#3D70B2',
+        color: '#356ae6',
       },
     },
-    checked: {},
+
+    checked: {
+    },
    })
 
 const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);

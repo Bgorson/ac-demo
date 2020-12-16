@@ -8,21 +8,24 @@ import TableCell from './TableCell'
 import TableContainer from '@material-ui/core/TableContainer';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import TableRow from './TableRow';
 import Paper from '@material-ui/core/Paper';
+import ThreeDotMenu from './ThreeDotMenu'
 // import Checkbox from '@material-ui/core/Checkbox';
 import Checkbox from './Checkbox'
 
         const headCells = [
-            { id: 'firstName', numeric: false, disablePadding: true, label: 'Contact' },
-            { id: 'value', numeric: true, disablePadding: false, label: 'Total Value' },
-            { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-            { id: 'deals', numeric: true, disablePadding: false, label: 'Deals' },
-            { id: 'tags', numeric: true, disablePadding: false, label: 'Tags' }
+            { id: 'firstName', numeric: false, label: 'Contact' },
+            { id: 'value', numeric: false, label: 'Total Value' },
+            { id: 'location', numeric: false,  label: 'Location' },
+            { id: 'deals', numeric: false, label: 'Deals' },
+            { id: 'tags', numeric: false,  label: 'Tags' }
           ];
           const useStyles = makeStyles((theme) => ({
             root: {
-             height:'28px',
+                 padding: 0,
+                 height: 27.5,
+                 color: 'gray',
             }
           }));
 export default function EnhancedTableHead(props) {
@@ -33,10 +36,12 @@ export default function EnhancedTableHead(props) {
     };
   
     return (
-      <TableHead style={{ height: 24}} className={classes.root}>
-        <TableRow >
-          <TableCell padding="checkbox">
+      <TableHead>
+        <TableRow className={classes.root}>
+          <TableCell padding="checkbox" className={classes.root}>
             <Checkbox
+            size={'small'}
+             color="primary"
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}
               inputProps={{ 'aria-label': 'select all contacts' }}
@@ -44,13 +49,12 @@ export default function EnhancedTableHead(props) {
           </TableCell>
           {headCells.map((headCell) => (
             <TableCell
+            className={classes.root}
               key={headCell.id}
-              align={headCell.numeric ? 'right' : 'left'}
-            //   padding={headCell.disablePadding ? 'none' : 'default'}
+              align={'left'}
               sortDirection={orderBy === headCell.id ? order : false}
             >
               <TableSortLabel
-                active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : 'asc'}
                 onClick={createSortHandler(headCell.id)}
               >
@@ -58,6 +62,9 @@ export default function EnhancedTableHead(props) {
               </TableSortLabel>
             </TableCell>
           ))}
+          <TableCell>
+            <ThreeDotMenu/>
+          </TableCell>
         </TableRow>
       </TableHead>
     );

@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, {useEffect} from 'react';
+import Avatar from './Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from './TableCell'
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import TableRow from './TableRow';import Paper from '@material-ui/core/Paper';
 import Checkbox from './Checkbox'
 import CustomTableHeader from './TableHeader'
 
@@ -23,10 +23,16 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 750,
   },
+  contact:{
+    fontWeight:600,
+    color:'#356ae6',
+    display:'flex',
+    alignItems:'baseline'
+  },
+
 }));
 
 function descendingComparator(a, b, orderBy) {
-  console.log("desc", orderBy)
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -60,7 +66,6 @@ export default function CustomTable({rows}) {
   const [selected, setSelected] = React.useState([]);
 
   const handleRequestSort = (event, property) => {
-    console.log("sorting", property)
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -127,18 +132,21 @@ export default function CustomTable({rows}) {
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
+                    color="primary"
+                    size={'small'}
                       checked={isItemSelected}
-                      inputProps={{ 'aria-labelledby': labelId }}
+                      inputProps={{ 'aria-labelledby': labelId}}
                     />
                   </TableCell>
-
               <TableCell component="th" id={labelId} scope="row" padding="none">
-              {row.firstName} {row.lastName}
+                <div className={classes.contact}>
+                <Avatar alt={row.firstName} src="/someImage.jpg">AA</Avatar>{row.firstName} {row.lastName}
+                </div>
                       </TableCell>
-              <TableCell align="right">{row.scoreValue}</TableCell>
-              <TableCell align="right">{row.geoIPs}</TableCell>
-              <TableCell align="right">{row.dealResponse }</TableCell>
-              <TableCell align="right">{row.contactTags}</TableCell>
+              <TableCell align="left">{row.scoreValue}</TableCell>
+              <TableCell align="left">{row.geoIPs}</TableCell>
+              <TableCell align="left">{row.dealTitle}</TableCell>
+              <TableCell align="left">{row.contactTags}</TableCell>
                 </TableRow>
               );
             })}

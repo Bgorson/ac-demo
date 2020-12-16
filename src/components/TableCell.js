@@ -4,10 +4,10 @@ import TableCell from '@material-ui/core/TableCell';
 
 const EnhancedTableCell = withStyles({
     paddingCheckbox: {
-    padding: '0 12px 0 12px',
+    padding: 0,
     },
     root:{
-        padding:0
+        padding:'5px 12px 0 0'
     }
   })(TableCell);
 
