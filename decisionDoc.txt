@@ -1,0 +1,5 @@
+Yarn over NPM- Speed
+Material UI for table- speed up development with established library
+Axios- promise based ++ REST API library I'm most familiar with. Easy to use
+Added a second page- Ease of use for data, thought it looked better than just listing all the data
+Created proxy server- issues with rate limiting
