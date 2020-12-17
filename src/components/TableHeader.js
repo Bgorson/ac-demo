@@ -10,7 +10,7 @@ import Checkbox from "./Checkbox";
 
 const headCells = [
   { id: "firstName", label: "Contact", sortable: true },
-  { id: "value", label: "Total Value", sortable: true },
+  { id: "totalValue", label: "Total Value", sortable: true },
   { id: "location", label: "Location", sortable: false },
   { id: "deals", label: "Deals", sortable: false },
   { id: "tags", label: "Tags", sortable: false },
