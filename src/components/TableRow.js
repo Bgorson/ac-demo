@@ -1,21 +1,19 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import TableRow from '@material-ui/core/TableRow';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import TableRow from "@material-ui/core/TableRow";
 
-
-const tableRowStyles = theme => ({
-    root: {
-      '&$selected': {
-        backgroundColor: '#FAFBFF',
-      },
-        "&$hover:hover": {
-            backgroundColor: '#FAFBFF',
-        },
+const tableRowStyles = (theme) => ({
+  root: {
+    "&$selected": {
+      backgroundColor: "#FAFBFF",
     },
-    selected: {
+    "&$hover:hover": {
+      backgroundColor: "#FAFBFF",
     },
-    hover:{}
-   })
+  },
+  selected: {},
+  hover: {},
+});
 
 const EnhancedTableRow = withStyles(tableRowStyles)(TableRow);
-export default EnhancedTableRow
+export default EnhancedTableRow;

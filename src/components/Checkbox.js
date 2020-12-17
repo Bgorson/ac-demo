@@ -1,19 +1,16 @@
-import { withStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from "@material-ui/core/styles";
+import Checkbox from "@material-ui/core/Checkbox";
 
-
-
-const checkBoxStyles = theme => ({
-    root: {
-        padding:'0 0 0 12px',
-      '&$checked': {
-        color: '#356ae6',
-      },
+const checkBoxStyles = (theme) => ({
+  root: {
+    padding: "0 0 0 12px",
+    "&$checked": {
+      color: "#356ae6",
     },
+  },
 
-    checked: {
-    },
-   })
+  checked: {},
+});
 
 const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
-export default CustomCheckbox
+export default CustomCheckbox;
