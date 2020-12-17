@@ -6,16 +6,15 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "./TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "./TableRow";
-import Paper from "@material-ui/core/Paper";
 import Checkbox from "./Checkbox";
 import CustomTableHeader from "./TableHeader";
 import ActionButton from "./ActionButton";
+import Chip from './Chip'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "auto",
+    width: "70%",
     margin: "2rem",
     border: "1px solid lightGrey;",
   },
@@ -66,9 +65,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-// eslint-disable-next-line react/prop-types
 export default function CustomTable({ rows }) {
-  console.log("this is rows",rows)
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("firstName");
@@ -163,10 +160,12 @@ export default function CustomTable({ rows }) {
                         {row.firstName} {row.lastName}
                       </div>
                     </TableCell>
-                    <TableCell align="left">{currency_symbols[row?.dealCurrency]}{row.totalValue > 0? row.totalValue:null}</TableCell>
+                    <TableCell align="left">{currency_symbols[row?.dealCurrency]}{row.totalValue== 0 ? null:row.totalValue}</TableCell>
                     <TableCell align="left">{row.location}</TableCell>
                     <TableCell align="left">{row.amountOfDeals|| 0}</TableCell>
-                    <TableCell align="left">{row.tagText}</TableCell>
+                    <TableCell style={{display:"flex"}} align="left">{row.tagText.map((element, index)=>(
+                     <Chip key= {index} text= {element}/>
+                    ))}</TableCell>
                     <TableCell align="left">
                       <ActionButton isItemSelected={isItemSelected} />
                     </TableCell>

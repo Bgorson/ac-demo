@@ -7,7 +7,6 @@ const EnhancedTableCell = withStyles({
   },
   root: {
     height: 45,
-    // padding:'5px 12px 0 0'
     padding: "0",
   },
   head: {

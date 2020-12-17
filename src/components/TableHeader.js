@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 import TableCell from "./TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
     color: "gray",
   },
 }));
-export default function EnhancedTableHead(props) {
+function EnhancedTableHead(props) {
   const classes = useStyles();
   const {
     onSelectAllClick,
@@ -35,7 +35,6 @@ export default function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
   return (
     <TableHead>
       <TableRow className={classes.root}>
@@ -74,3 +73,12 @@ export default function EnhancedTableHead(props) {
     </TableHead>
   );
 }
+EnhancedTableHead.propTypes = {
+  onSelectAllClick: PropTypes.func,
+  order:PropTypes.array,
+  orderBy:PropTypes.string,
+  numSelected:PropTypes.number,
+  rowCount:PropTypes.number,
+  onRequestSort:PropTypes.func
+};
+export default EnhancedTableHead

@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
+import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -12,7 +12,7 @@ import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 
 const options = ["Remove", "Email"];
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   mainButton: {
     padding: 15,
     fontSize: 12,
@@ -33,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
     visibility: "hidden",
   },
 }));
-// eslint-disable-next-line react/prop-types
-export default function SplitButton({ isItemSelected }) {
+export default function ActionButton({ isItemSelected }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -42,7 +41,6 @@ export default function SplitButton({ isItemSelected }) {
 
   const handleClick = (e) => {
     e.stopPropagation();
-    console.info(`You clicked ${options[selectedIndex]}`);
   };
 
   const handleMenuItemClick = (event, index) => {
@@ -127,3 +125,6 @@ export default function SplitButton({ isItemSelected }) {
     </div>
   );
 }
+ActionButton.propTypes = {
+  isItemSelected: PropTypes.bool
+};

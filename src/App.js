@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Table from "./components/Table";
 import axios from "axios";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -41,7 +40,6 @@ function App() {
         const geoIps= res.data.geoIps
         const tags= res.data.tags
         const contactTags= res.data.contactTags
-
         let array=[]
         users.forEach(contact=>{
           let entry={}
@@ -52,7 +50,6 @@ function App() {
           entry.firstName=contact.firstName
           entry.lastName= contact.lastName
           entry.contactTags= contact.contactTags
-
           for (let i=0; i< geoIps.length;i++){
             if (contact.id=== geoIps[i].contact){
               let id= geoIps[i].geoaddrid
@@ -72,7 +69,6 @@ function App() {
               dealTotal+= parseInt(deals[i].value)
             }
           } 
-          
           for (let n=0;n<contactTags.length;n++){
             if (contactTags[n].contact == contact.id){
 
@@ -83,14 +79,11 @@ function App() {
                 }
               }
             }
-
             }
 
-          entry.totalValue= dealTotal
+          entry.totalValue= dealTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
           entry.amountOfDeals= totalAmountOfDeals
-          entry.tagText= tagArray.toString(', ')
-          
- 
+          entry.tagText= tagArray
           array.push(entry)
           setRowData(array)
         })
