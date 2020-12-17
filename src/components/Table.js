@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from './TableRow';import Paper from '@material-ui/core/Paper';
 import Checkbox from './Checkbox'
 import CustomTableHeader from './TableHeader'
+import ActionButton from './ActionButton'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     alignItems:'baseline'
   },
+
 
 }));
 
@@ -105,7 +107,7 @@ export default function CustomTable({rows}) {
   return (
     <div className={classes.root}>
     <TableContainer>
-      <Table className={classes.table} aria-label="a dense table">
+      <Table className={classes.table} aria-label="table">
         <CustomTableHeader
         numSelected={selected.length}
         order={order}
@@ -118,6 +120,8 @@ export default function CustomTable({rows}) {
         <TableBody>
         {stableSort(rows, getComparator(order, orderBy))
              .map((row, index) => {
+               const firstNameLetter= row.firstName.charAt(0)
+               const LastNameLetter= row.lastName.charAt(0)
               const isItemSelected = isSelected(row.id);
               const labelId = `enhanced-table-checkbox-${index}`;
               return (
@@ -134,19 +138,20 @@ export default function CustomTable({rows}) {
                     <Checkbox
                     color="primary"
                     size={'small'}
-                      checked={isItemSelected}
-                      inputProps={{ 'aria-labelledby': labelId}}
+                    checked={isItemSelected}
+                    inputProps={{ 'aria-labelledby': labelId}}
                     />
                   </TableCell>
               <TableCell component="th" id={labelId} scope="row" padding="none">
                 <div className={classes.contact}>
-                <Avatar alt={row.firstName} src="/someImage.jpg">AA</Avatar>{row.firstName} {row.lastName}
+                <Avatar alt={row.firstName} src="/someImage.jpg">{firstNameLetter}{LastNameLetter}</Avatar>{row.firstName} {row.lastName}
                 </div>
                       </TableCell>
               <TableCell align="left">{row.scoreValue}</TableCell>
               <TableCell align="left">{row.geoIPs}</TableCell>
               <TableCell align="left">{row.dealTitle}</TableCell>
               <TableCell align="left">{row.contactTags}</TableCell>
+              <TableCell align="left"><ActionButton isItemSelected={isItemSelected} /></TableCell>
                 </TableRow>
               );
             })}

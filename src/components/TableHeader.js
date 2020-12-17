@@ -24,7 +24,7 @@ import Checkbox from './Checkbox'
           const useStyles = makeStyles((theme) => ({
             root: {
                  padding: 0,
-                 height: 27.5,
+                 height: '28px',
                  color: 'gray',
             }
           }));
@@ -36,9 +36,9 @@ export default function EnhancedTableHead(props) {
     };
   
     return (
-      <TableHead>
+      <TableHead >
         <TableRow className={classes.root}>
-          <TableCell padding="checkbox" className={classes.root}>
+          <TableCell className={classes.root}>
             <Checkbox
             size={'small'}
              color="primary"
@@ -49,7 +49,7 @@ export default function EnhancedTableHead(props) {
           </TableCell>
           {headCells.map((headCell) => (
             <TableCell
-            className={classes.root}
+              className={classes.root}
               key={headCell.id}
               align={'left'}
               sortDirection={orderBy === headCell.id ? order : false}
@@ -62,7 +62,7 @@ export default function EnhancedTableHead(props) {
               </TableSortLabel>
             </TableCell>
           ))}
-          <TableCell>
+          <TableCell className={classes.root} >
             <ThreeDotMenu/>
           </TableCell>
         </TableRow>
