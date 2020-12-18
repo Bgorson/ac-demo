@@ -24,4 +24,5 @@ Rows have an avatar that defaults to their initials if no working picture is pro
 
 Rows can be checked by clicking anywhere in the row, not just the checkbox
 
-Tags can be removed by clicking the "x"
+Data that has no value (City, amount) will display nothing in the table. The only exception is "deals" which will display 0.
+
