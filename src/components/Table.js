@@ -1,6 +1,6 @@
-import React  from "react";
+import React from "react";
 import Avatar from "./Avatar";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,7 +10,9 @@ import TableRow from "./TableRow";
 import Checkbox from "./Checkbox";
 import CustomTableHeader from "./TableHeader";
 import ActionButton from "./ActionButton";
-import Chip from './Chip'
+import Chip from "./Chip";
+
+const initialSortValues = { order: "asc", orderBy: "firstName" };
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,12 +34,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 var currency_symbols = {
-  'usd': '$', 
-  'eur': '€', 
-  'aud': 'A$', 
-  'gbp': '£', 
-  'jpy': '¥', 
-  'krw': '₩',
+  usd: "$",
+  eur: "€",
+  aud: "A$",
+  gbp: "£",
+  jpy: "¥",
+  krw: "₩",
 };
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -65,13 +67,13 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
- function CustomTable({ rows }) {
+function CustomTable({ rows }) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("firstName");
+  const [order, setOrder] = React.useState(initialSortValues.order);
+  const [orderBy, setOrderBy] = React.useState(initialSortValues.orderBy);
   const [selected, setSelected] = React.useState([]);
 
-  const handleRequestSort = (event,property) => {
+  const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
@@ -160,12 +162,17 @@ function stableSort(array, comparator) {
                         {row.firstName} {row.lastName}
                       </div>
                     </TableCell>
-                    <TableCell data-testid={"amount"} align="left">{currency_symbols[row?.dealCurrency]}{row.totalValue== 0 ? null:row.totalValue}</TableCell>
+                    <TableCell data-testid={"amount"} align="left">
+                      {currency_symbols[row?.dealCurrency]}
+                      {row.totalValue == 0 ? null : row.totalValue}
+                    </TableCell>
                     <TableCell align="left">{row.location}</TableCell>
-                    <TableCell align="left">{row.amountOfDeals|| 0}</TableCell>
-                    <TableCell style={{display:"flex"}} align="left">{row.tagText.map((element, index)=>(
-                     <Chip key= {index} text= {element}/>
-                    ))}</TableCell>
+                    <TableCell align="left">{row.amountOfDeals || 0}</TableCell>
+                    <TableCell style={{ display: "flex" }} align="left">
+                      {row.tagText.map((element, index) => (
+                        <Chip key={index} text={element} />
+                      ))}
+                    </TableCell>
                     <TableCell align="left">
                       <ActionButton isItemSelected={isItemSelected} />
                     </TableCell>
@@ -182,4 +189,4 @@ function stableSort(array, comparator) {
 CustomTable.propTypes = {
   rows: PropTypes.array,
 };
-export default CustomTable
+export default CustomTable;

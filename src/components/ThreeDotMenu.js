@@ -37,19 +37,11 @@ export default function SimpleMenu() {
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
@@ -81,12 +73,8 @@ export default function SimpleMenu() {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
-                  <MenuItem onClick={handleClose}>Export</MenuItem>
+                <MenuList autoFocusItem={open} id="menu-list-grow">
+                  <MenuItem onClick={handleClose}>Export Table</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

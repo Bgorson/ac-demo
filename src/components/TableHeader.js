@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import TableCell from "./TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
@@ -18,7 +18,7 @@ const headCells = [
 const useStyles = makeStyles(() => ({
   root: {
     padding: 0,
-    height: "28px",
+    height: 28,
     color: "gray",
   },
 }));
@@ -56,7 +56,7 @@ function EnhancedTableHead(props) {
           >
             {headCell.sortable ? (
               <TableSortLabel
-              data-testid={headCell.id}
+                data-testid={headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
               >
@@ -76,10 +76,10 @@ function EnhancedTableHead(props) {
 }
 EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func,
-  order:PropTypes.string,
-  orderBy:PropTypes.string,
-  numSelected:PropTypes.number,
-  rowCount:PropTypes.number,
-  onRequestSort:PropTypes.func
+  order: PropTypes.string,
+  orderBy: PropTypes.string,
+  numSelected: PropTypes.number,
+  rowCount: PropTypes.number,
+  onRequestSort: PropTypes.func,
 };
-export default EnhancedTableHead
+export default EnhancedTableHead;

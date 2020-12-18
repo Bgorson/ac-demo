@@ -1,7 +1,7 @@
 import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 
-const checkBoxStyles = (theme) => ({
+const checkBoxStyles = () => ({
   root: {
     padding: "0 0 0 12px",
     "&$checked": {
