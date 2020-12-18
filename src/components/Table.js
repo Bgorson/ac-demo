@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React  from "react";
 import Avatar from "./Avatar";
+import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,7 +12,7 @@ import CustomTableHeader from "./TableHeader";
 import ActionButton from "./ActionButton";
 import Chip from './Chip'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "70%",
     margin: "2rem",
@@ -65,13 +65,13 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function CustomTable({ rows }) {
+ function CustomTable({ rows }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("firstName");
   const [selected, setSelected] = React.useState([]);
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (event,property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
@@ -160,7 +160,7 @@ export default function CustomTable({ rows }) {
                         {row.firstName} {row.lastName}
                       </div>
                     </TableCell>
-                    <TableCell align="left">{currency_symbols[row?.dealCurrency]}{row.totalValue== 0 ? null:row.totalValue}</TableCell>
+                    <TableCell data-testid={"amount"} align="left">{currency_symbols[row?.dealCurrency]}{row.totalValue== 0 ? null:row.totalValue}</TableCell>
                     <TableCell align="left">{row.location}</TableCell>
                     <TableCell align="left">{row.amountOfDeals|| 0}</TableCell>
                     <TableCell style={{display:"flex"}} align="left">{row.tagText.map((element, index)=>(
@@ -179,3 +179,7 @@ export default function CustomTable({ rows }) {
     </div>
   );
 }
+CustomTable.propTypes = {
+  rows: PropTypes.array,
+};
+export default CustomTable

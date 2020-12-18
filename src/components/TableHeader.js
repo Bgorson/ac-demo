@@ -56,6 +56,7 @@ function EnhancedTableHead(props) {
           >
             {headCell.sortable ? (
               <TableSortLabel
+              data-testid={headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
               >
@@ -75,7 +76,7 @@ function EnhancedTableHead(props) {
 }
 EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func,
-  order:PropTypes.array,
+  order:PropTypes.string,
   orderBy:PropTypes.string,
   numSelected:PropTypes.number,
   rowCount:PropTypes.number,

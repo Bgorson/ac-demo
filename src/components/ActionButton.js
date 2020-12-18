@@ -76,6 +76,7 @@ export default function ActionButton({ isItemSelected }) {
         </Button>
         <Button
           className={classes.arrowButton}
+          data-testid="menuArrow"
           aria-controls={open ? "split-button-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
           aria-label="select merge strategy"

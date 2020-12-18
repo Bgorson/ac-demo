@@ -1,7 +1,7 @@
-/* eslint-disable react/display-name */
 import React, { useEffect, useState } from "react";
 import Table from "./components/Table";
 import axios from "axios";
+import Loading from './components/Loading'
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
@@ -34,7 +34,6 @@ function App() {
         }
       )
       .then((res) => {
-        console.log(res.data)
         const users = res.data.contacts
         const deals = res.data.deals
         const geoIps= res.data.geoIps
@@ -50,16 +49,15 @@ function App() {
           entry.firstName=contact.firstName
           entry.lastName= contact.lastName
           entry.contactTags= contact.contactTags
+          //Clean this up with [Values] instead of loops?
           for (let i=0; i< geoIps.length;i++){
             if (contact.id=== geoIps[i].contact){
               let id= geoIps[i].geoaddrid
               for (let n=0;n < res.data.geoAddresses.length;n++){
                 if (id=== res.data.geoAddresses[n].id){
                   entry.location= res.data.geoAddresses[n].city +", "+ res.data.geoAddresses[n].country 
-
                 }
               }
-              
             }
           }
           for (let i=0; i<deals.length;i++){
@@ -94,7 +92,9 @@ function App() {
   return (
     <div>
       {loading ? (
-        <div>Loading</div>
+        <div style={{display:'flex', marginTop:'6rem',justifyContent:'center', alignContent:'center'}}>
+        <Loading/>
+        </div>
       ) : (
         <ThemeProvider theme={theme}>
           <Table rows={rowData} />

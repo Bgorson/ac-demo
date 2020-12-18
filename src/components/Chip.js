@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth:180,
     height:20,
+    marginTop:10,
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
@@ -45,5 +46,5 @@ export default function SmallChips({text}) {
   );
 }
 SmallChips.propTypes = {
-    text: PropTypes.array
+    text: PropTypes.string
   };
