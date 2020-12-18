@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "./components/Table";
 import axios from "axios";
-import Loading from './components/Loading'
+import Loading from "./components/Loading";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
@@ -20,8 +20,8 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const [loading, setLoading]= useState(true)
-  const [rowData, setRowData]=useState(null)
+  const [loading, setLoading] = useState(true);
+  const [rowData, setRowData] = useState(null);
   useEffect(() => {
     axios
       .get(
@@ -34,57 +34,61 @@ function App() {
         }
       )
       .then((res) => {
-        const users = res.data.contacts
-        const deals = res.data.deals
-        const geoIps= res.data.geoIps
-        const tags= res.data.tags
-        const contactTags= res.data.contactTags
-        let array=[]
-        users.forEach(contact=>{
-          let entry={}
-          let dealTotal=0;
-          let totalAmountOfDeals=0;
-          let tagArray=[]
-          entry.id= contact.id
-          entry.firstName=contact.firstName
-          entry.lastName= contact.lastName
-          entry.contactTags= contact.contactTags
-          //Clean this up with [Values] instead of loops?
-          for (let i=0; i< geoIps.length;i++){
-            if (contact.id=== geoIps[i].contact){
-              let id= geoIps[i].geoaddrid
-              for (let n=0;n < res.data.geoAddresses.length;n++){
-                if (id=== res.data.geoAddresses[n].id){
-                  entry.location= res.data.geoAddresses[n].city +", "+ res.data.geoAddresses[n].country 
+        const users = res.data.contacts;
+        const deals = res.data.deals;
+        const geoIps = res.data.geoIps;
+        const tags = res.data.tags;
+        const contactTags = res.data.contactTags;
+        let array = [];
+        users.forEach((contact) => {
+          let entry = {};
+          let dealTotal = 0;
+          let totalAmountOfDeals = 0;
+          let tagArray = [];
+          entry.id = contact.id;
+          entry.firstName = contact.firstName;
+          entry.lastName = contact.lastName;
+          entry.contactTags = contact.contactTags;
+
+          let geoAddressID = geoIps.filter(
+            (element) => element.contact == contact.id
+          )[0]?.geoaddrid;
+          for (let n = 0; n < res.data.geoAddresses.length; n++) {
+            if (geoAddressID === res.data.geoAddresses[n].id) {
+              entry.location =
+                res.data.geoAddresses[n].city +
+                ", " +
+                res.data.geoAddresses[n].country;
+            }
+          }
+
+          let contactDeals = deals.filter(
+            (element) => element.contact == contact.id
+          );
+          totalAmountOfDeals = contactDeals.length;
+          if (contactDeals.length > 0) {
+            entry.dealCurrency = deals[0].currency;
+          }
+          for (let i = 0; i < contactDeals.length; i++) {
+            dealTotal += parseInt(contactDeals[i].value);
+          }
+          for (let n = 0; n < contactTags.length; n++) {
+            if (contactTags[n].contact == contact.id) {
+              for (let i = 0; i < contact.contactTags.length; i++) {
+                if (contactTags[n].tag == tags[i].id) {
+                  tagArray.push(tags[i].tag);
                 }
               }
             }
           }
-          for (let i=0; i<deals.length;i++){
-            if (deals[i].contact=== contact.id){
-              totalAmountOfDeals++
-              entry.dealCurrency= deals[i].currency
-              dealTotal+= parseInt(deals[i].value)
-            }
-          } 
-          for (let n=0;n<contactTags.length;n++){
-            if (contactTags[n].contact == contact.id){
-
-              for (let i=0; i<contact.contactTags.length;i++){
-
-                if (contactTags[n].tag==tags[i].id){
-                  tagArray.push(tags[i].tag)
-                }
-              }
-            }
-            }
-
-          entry.totalValue= dealTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-          entry.amountOfDeals= totalAmountOfDeals
-          entry.tagText= tagArray
-          array.push(entry)
-          setRowData(array)
-        })
+          entry.totalValue = dealTotal
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          entry.amountOfDeals = totalAmountOfDeals;
+          entry.tagText = tagArray;
+          array.push(entry);
+          setRowData(array);
+        });
         setLoading(false);
       });
   }, []);
@@ -92,8 +96,15 @@ function App() {
   return (
     <div>
       {loading ? (
-        <div style={{display:'flex', marginTop:'6rem',justifyContent:'center', alignContent:'center'}}>
-        <Loading/>
+        <div
+          style={{
+            display: "flex",
+            marginTop: "6rem",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Loading />
         </div>
       ) : (
         <ThemeProvider theme={theme}>
