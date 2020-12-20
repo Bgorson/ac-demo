@@ -12,9 +12,9 @@ The Location is determined by looking at the GeoAddress of the contact and displ
 
 Deals is determined by the total number of deals in a contact
 
-Tags are determined by looking at current Contact tags and displaying the Tag
+Tags are determined by looking at current Contact tags and displaying the Tag. They would be deleted by clicking the x. Functionality not implemented
 
-The 3 dot menu in the uppercorner would allow a user to perform table-wide actions such as exporting it.
+The 3 dot menu in the uppercorner would allow a user to perform table-wide actions such as exporting it. Functionality not implemented.
 
 The Action Button on the far right is only visible when a row is selected. A user is able to perfom some actions such as emailing the contact or removing that row
 
